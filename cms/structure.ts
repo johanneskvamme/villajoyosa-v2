@@ -1,13 +1,13 @@
-import S from "@sanity/desk-tool/structure-builder";
 import { MdTitle } from "react-icons/md";
+import type { StructureBuilder, StructureResolver, ListItemBuilder } from "sanity/structure";
 
-const singletonRestrictedPages = (listItem) =>
-  !["pageTitle"].includes(listItem.getId());
+const singletonRestrictedPages = (listItem: ListItemBuilder) =>
+  !["pageTitle"].includes(listItem.getId() ?? "");
 
-const undesiredLibraryDocuments = (listItem) =>
-  !["media.tag"].includes(listItem.getId());
+const undesiredLibraryDocuments = (listItem: ListItemBuilder) =>
+  !["media.tag"].includes(listItem.getId() ?? "");
 
-export default () =>
+export const structure: StructureResolver = (S: StructureBuilder) =>
   S.list()
     .title("Innhold")
     .items([
