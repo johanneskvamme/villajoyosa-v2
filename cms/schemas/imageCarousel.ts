@@ -1,22 +1,23 @@
-import { FaRegImages } from 'react-icons/fa';
+import { defineType, defineField } from "sanity";
+import { FaRegImages } from "react-icons/fa";
 
-export default {
-  title: 'Bildekarusell-bilder',
-  name: 'imageCarousel',
+export default defineType({
+  title: "Bildekarusell-bilder",
+  name: "imageCarousel",
   icon: FaRegImages,
-  type: 'document',
+  type: "document",
   fields: [
-    {
+    defineField({
       title: "Navn",
       name: "name",
       description: "Navn vil vises om man holder musepekeren over bildet",
-      type: "string"
-    },
-    {
-      title: 'Bilde',
-      name: 'image',
-      description: 'Bredt bilde til looping på forsiden',
-      type: 'image',
-    },
+      type: "string",
+    }),
+    defineField({
+      title: "Bilde",
+      name: "image",
+      description: "Bredt bilde til looping på forsiden",
+      type: "image",
+    }),
   ],
-};
+});

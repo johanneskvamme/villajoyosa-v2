@@ -1,41 +1,43 @@
+import { defineType, defineField } from "sanity";
+import { preview } from "sanity-plugin-icon-picker";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import preview from 'part:sanity-plugin-icon-picker/preview';
-import LeafletGeopointInput from 'sanity-plugin-leaflet-input'
 
-export default {
-  title: 'Butikker og lokasjoner av interesse',
-  name: 'location',
+export default defineType({
+  title: "Butikker og lokasjoner av interesse",
+  name: "location",
   icon: FaMapMarkerAlt,
-  type: 'document',
+  type: "document",
   fields: [
-    {
-      title: 'Navn',
-      name: 'name',
-      type: 'string',
-    },
-    {
-      title: 'Tekst & Ikon',
-      name: 'display',
-      type: 'textWithIcon',
-    },
-    {
+    defineField({
+      title: "Navn",
+      name: "name",
+      type: "string",
+    }),
+    defineField({
+      title: "Tekst & Ikon",
+      name: "display",
+      type: "textWithIcon",
+    }),
+    defineField({
       title: "Kartmarkør",
       name: "position",
-      type: 'geopoint',
-      inputComponent: LeafletGeopointInput
-    }
+      type: "geopoint",
+    }),
   ],
   preview: {
     select: {
-      title: 'name',
+      title: "name",
       provider: "display.icon.provider",
       name: "display.icon.name",
     },
     prepare(icon) {
       return {
         title: icon.title,
-        media: preview(icon),
+        media: preview({
+          provider: icon.provider,
+          name: icon.name,
+        }),
       };
     },
-  }
-};
+  },
+});

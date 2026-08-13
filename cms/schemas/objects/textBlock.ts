@@ -1,6 +1,8 @@
-export default {
+import { defineArrayMember, defineType } from "sanity";
+
+export default defineType({
   title: "Textblock",
   name: "textblock",
   type: "array",
-  of: [{ type: "block" }, { type: "textWithIcon" }],
-};
+  of: [defineArrayMember({ type: "block" }), defineArrayMember({ type: "textWithIcon" })],
+});

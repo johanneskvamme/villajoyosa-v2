@@ -1,34 +1,38 @@
-import preview from 'part:sanity-plugin-icon-picker/preview';
-import { FaClipboardList } from 'react-icons/fa';
+import { defineType, defineField } from "sanity";
+import { preview } from "sanity-plugin-icon-picker";
+import { FaClipboardList } from "react-icons/fa";
 
-export default {
-  title: 'Fasiliteter',
-  name: 'amenity',
+export default defineType({
+  title: "Fasiliteter",
+  name: "amenity",
   icon: FaClipboardList,
-  type: 'document',
+  type: "document",
   fields: [
-    {
-      title: 'Navn',
-      name: 'name',
-      type: 'string',
-    },
-    {
-      title: 'Tekst & Ikon',
-      name: 'display',
-      type: 'textWithIcon',
-    },
+    defineField({
+      title: "Navn",
+      name: "name",
+      type: "string",
+    }),
+    defineField({
+      title: "Tekst & Ikon",
+      name: "display",
+      type: "textWithIcon",
+    }),
   ],
   preview: {
     select: {
-      title: 'name',
+      title: "name",
       provider: "display.icon.provider",
       name: "display.icon.name",
     },
     prepare(icon) {
       return {
         title: icon.title,
-        media: preview(icon),
+        media: preview({
+          provider: icon.provider,
+          name: icon.name,
+        }),
       };
     },
-  }
-};
+  },
+});

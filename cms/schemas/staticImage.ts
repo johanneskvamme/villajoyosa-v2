@@ -1,56 +1,41 @@
-type SanityDocument = {
-  title: string;
-  name: string;
-  type: "document" | "object";
-  fields: any[];
-  [x: string]: any;
-};
+import { defineType, defineField } from "sanity";
 import { FaRegImage } from "react-icons/fa";
 
-const staticImage: SanityDocument = {
+export default defineType({
   title: "Bildeposisjoner",
   name: "imagePosition",
   type: "document",
   icon: FaRegImage,
-  __experimental_actions: [/*'create',*/ "update", /*'delete',*/ "publish"],
   fields: [
-    {
+    defineField({
       title: "Plass",
       name: "position",
       type: "string",
-      readonly: true,
+      readOnly: true,
       options: {
         list: [
-          {
-            title: "Vår leilighet",
-            value: "vaarleilighet",
-          },
-          {
-            title: "Banner på toppen",
-            value: "banner",
-          },
+          { title: "Vår leilighet", value: "vaarleilighet" },
+          { title: "Banner på toppen", value: "banner" },
           { title: "Ved knapper", value: "actionbuttons" },
         ],
         layout: "dropdown",
       },
-    },
-    {
+    }),
+    defineField({
       title: "Bilde",
       name: "image",
       type: "image",
       fields: [
-        {
+        defineField({
           title: "Bildetekst",
           name: "caption",
           type: "string",
-        },
+        }),
       ],
       options: {
         metadata: ["dimensions"],
         hotspot: true,
       },
-    },
+    }),
   ],
-};
-
-export default staticImage;
+});

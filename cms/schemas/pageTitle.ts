@@ -1,19 +1,19 @@
+import { defineType, defineField } from "sanity";
 
-export default {
-  title: 'Tittel',
-  name: 'pageTitle',
-  type: 'document',
-  __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
+export default defineType({
+  title: "Tittel",
+  name: "pageTitle",
+  type: "document",
   fields: [
-    {
-      title: 'Tittel',
-      name: 'title',
-      type: 'string',
-    },
-    {
-      title: 'Undertittel',
-      name: 'subtitle',
-      type: 'string',
-    },
+    defineField({
+      title: "Tittel",
+      name: "title",
+      type: "string",
+    }),
+    defineField({
+      title: "Undertittel",
+      name: "subtitle",
+      type: "string",
+    }),
   ],
-};
+});

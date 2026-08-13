@@ -1,3 +1,5 @@
+import { defineType } from "sanity";
+
 type PageNB = "Forsiden" | "Bilder" | "Området" | "Leie" | "Transport";
 type PageEN = "Frontpage" | "Images" | "Area" | "Rent" | "Transport";
 
@@ -11,8 +13,7 @@ export const Pages: Record<PageEN, PageNB> = {
 
 const sharedPageSelectorInfo = {
   title: "Vises på side",
-  name: "pageSelector",
-  type: "string",
+  type: "string" as const,
   options: {
     list: [
       { title: "Forsiden", value: "frontpage" },
@@ -21,7 +22,7 @@ const sharedPageSelectorInfo = {
       { title: "Leie", value: "rent" },
       { title: "Transport", value: "transport" },
     ],
-    layout: "dropdown",
+    layout: "dropdown" as const,
   },
 };
 
@@ -30,11 +31,11 @@ export const createPageSelectorWithSubset = (
   subsetOfPages: PageNB[]
 ) => {
   const optionsList = subsetOfPages.map(pageEnumToOption);
-  return {
+  return defineType({
     ...sharedPageSelectorInfo,
     name: selectorName,
     options: { ...sharedPageSelectorInfo.options, list: optionsList },
-  };
+  });
 };
 
 const PagesByNB = Object.entries(Pages).reduce(
