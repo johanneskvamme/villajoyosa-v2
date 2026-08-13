@@ -1,0 +1,12 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# sanity studio runtime cache
+.sanity/
+
+# misc
+.DS_Store
+*.log
