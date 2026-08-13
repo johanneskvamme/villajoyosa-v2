@@ -17,7 +17,6 @@
     "@sanity/client": "^3.3.0",
     "@sanity/icons": "^1.2.1",
     "@sanity/image-url": "^1.0.1",
-    "@splitbee/web": "^0.3.0",
     "leaflet": "^1.7.1",
     "next": "^12.1.6",
     "next-sitemap": "^1.6.184",
