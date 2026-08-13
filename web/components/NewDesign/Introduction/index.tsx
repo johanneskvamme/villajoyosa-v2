@@ -6,7 +6,6 @@ import {
   MobileOnly,
 } from "components/NewDesign/common";
 import { ImageAtStaticPosition } from "types/local";
-import { urlFor } from "urlBuilder";
 import IntroductionText from "./IntroductionText";
 import RentalButtons from "./RentalButtons";
 import Image from "next/image";

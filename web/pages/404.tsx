@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 const NotFound: FC = () => {
   return (
@@ -11,7 +12,7 @@ const NotFound: FC = () => {
         <h1>404</h1>
         <p>Siden ble ikke funnet</p>
         <p>
-          <a href="/">Gå til forsiden</a>
+          <Link href="/">Gå til forsiden</Link>
         </p>
       </main>
     </>

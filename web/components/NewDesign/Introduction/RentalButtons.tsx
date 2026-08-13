@@ -81,14 +81,6 @@ const ActionButtonSection = styled.section`
   }
 `;
 
-const KontaktOssLink = styled.a`
-  text-decoration: underline;
-  margin-bottom: 13px;
-  @media screen and (min-width: 1024px) {
-    font-size: initial;
-  }
-`;
-
 const RentalLinkWrapper = styled.section`
   display: flex;
   flex-direction: row;

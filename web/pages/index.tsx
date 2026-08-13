@@ -5,8 +5,6 @@ import {
   Amenity,
   ImageAtStaticPosition,
   ImagePosition,
-  PageTitle,
-  TextBlock,
 } from "../types/local";
 import { SanityImage } from "../types/sanityTypes";
 import Head from "next/head";
@@ -45,7 +43,7 @@ const LeilighetInfoWrapper = styled.div`
 `;
 
 const Home: FC<Props> = (props) => {
-  const { amenities, carouselImages, imagesAtStaticPositions } = props;
+  const { carouselImages, imagesAtStaticPositions } = props;
   return (
     <>
       <Head>
@@ -108,7 +106,7 @@ const Home: FC<Props> = (props) => {
 };
 
 export async function getStaticProps(
-  context: NextPageContext
+  _context: NextPageContext
 ): Promise<{ props: Props }> {
   const amenityQuery = '*[_type == "amenity"]';
   const amenities = await client.fetch(amenityQuery);
