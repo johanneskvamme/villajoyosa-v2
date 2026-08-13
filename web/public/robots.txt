@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://villajoyosa.kvamme.land
-
-# Sitemaps
-Sitemap: https://villajoyosa.kvamme.land/sitemap.xml
