@@ -33,7 +33,7 @@ export default defineType({
         }),
       ],
       options: {
-        metadata: ["dimensions"],
+        metadata: ["lqip"],
         hotspot: true,
       },
     }),
