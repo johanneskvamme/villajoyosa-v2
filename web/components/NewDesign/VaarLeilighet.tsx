@@ -67,11 +67,10 @@ export default function VaarLeilighet({ image }: Props) {
       </InnholdsText>
       <VaarLeilighetImage>
         <RoundedBorderImage
-          alt={image?.image?.name}
+          alt={image?.image?.name ?? ""}
           src={imageUrl}
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
+          fill
+          style={{ objectFit: "cover", objectPosition: "center" }}
           loader={loader}
           blurDataURL={image?.image?.lqip}
         />
