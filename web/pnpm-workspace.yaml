@@ -1,0 +1,2 @@
+minimumReleaseAgeExclude:
+  - '@sanity/client@8.0.0'

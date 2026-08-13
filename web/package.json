@@ -2,6 +2,7 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.13.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,34 +11,22 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@fevernova90/next-sanity-image": "^0.0.4",
-    "@sanity/block-content-to-react": "^3.0.0",
-    "@sanity/client": "^3.3.0",
-    "@sanity/icons": "^1.2.1",
-    "@sanity/image-url": "^1.0.1",
-    "leaflet": "^1.7.1",
-    "next": "^12.1.6",
-    "next-sitemap": "^1.6.184",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0",
-    "react-leaflet": "^3.2.1",
-    "react-photo-album": "^1.13.4",
-    "react-responsive-carousel": "^3.2.20",
-    "swiper": "^6.8.0",
-    "yet-another-react-lightbox": "^1.2.3"
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@sanity/client": "^8.0.0",
+    "@sanity/image-url": "^2.1.1",
+    "next": "^16.3.0",
+    "next-sitemap": "^4.2.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-icons": "^5.7.0",
+    "react-photo-album": "^3.6.1",
+    "yet-another-react-lightbox": "^3.32.2"
   },
   "devDependencies": {
-    "@types/leaflet": "^1.7.5",
-    "@types/node": "^17.0.35",
-    "@types/react": "^17.0.15",
-    "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1",
-    "typescript": "^4.4.0"
-  },
-  "overrides": {
-    "eventsource": ">=2.0.2"
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "typescript": "^5.9.3"
   }
 }
