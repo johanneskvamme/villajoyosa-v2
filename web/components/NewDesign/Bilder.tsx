@@ -1,11 +1,16 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import PhotoAlbum from "react-photo-album";
+import {
+  ColumnsPhotoAlbum,
+  RowsPhotoAlbum,
+  type Photo,
+  type RenderImageContext,
+  type RenderImageProps,
+} from "react-photo-album";
 import { urlFor } from "urlBuilder";
-import { Lightbox } from "yet-another-react-lightbox";
+import { Lightbox, type SlideImage } from "yet-another-react-lightbox";
 import { DesktopOnly, Header, loader, MobileOnly } from "./common";
 import Image from "next/image";
-import { PhotoProps } from "react-photo-album";
 
 const Center = styled.div`
   display: block;
@@ -29,58 +34,76 @@ type Props = {
   images: any[];
 };
 
+type PhotoWithBlur = Photo & {
+  blurDataUrl?: string;
+};
+
 const breakpoints = [1080, 640, 384, 256, 128, 96, 64, 48];
+
+const renderNextJsImage = (
+  imageProps: RenderImageProps,
+  { photo, width, height }: RenderImageContext<PhotoWithBlur>,
+) => (
+  <Image
+    src={photo.src}
+    alt={photo.alt ?? ""}
+    sizes={imageProps.sizes}
+    className={imageProps.className}
+    style={imageProps.style}
+    width={width}
+    height={height}
+    loader={loader}
+    blurDataURL={photo.blurDataUrl}
+  />
+);
+
 export default function Bilder({ images }: Props) {
   const [index, setIndex] = useState(-1);
 
-  const imagesInPhotoAlbumFormat = images.map((img) => ({
-    height: img.dimensions.height,
-    width: img.dimensions.width,
-    src: img.url,
-    blurDataUrl: img.lqip,
-    images: breakpoints.map((breakpoint) => {
-      const height = Math.round(
-        (img.dimensions.height / img.dimensions.width) * breakpoint
-      );
-      return {
-        src: urlFor(img.url).width(breakpoint).height(height).url(),
-        width: breakpoint,
-        height,
-      };
-    }),
-  }));
+  const photos: PhotoWithBlur[] = images.map((img) => {
+    const width = Number(img.dimensions.width);
+    const height = Number(img.dimensions.height);
+    return {
+      src: img.url,
+      width,
+      height,
+      blurDataUrl: img.lqip,
+      srcSet: breakpoints.map((breakpoint) => {
+        const bpHeight = Math.round((height / width) * breakpoint);
+        return {
+          src: urlFor(img.url).width(breakpoint).height(bpHeight).url(),
+          width: breakpoint,
+          height: bpHeight,
+        };
+      }),
+    };
+  });
 
-  const slides = imagesInPhotoAlbumFormat.map(
-    ({ src, width, height, images }) => ({
-      src,
-      aspectRatio: width / height,
-      srcSet: images.map((image) => ({
-        src: image.src,
-        width: image.width,
-      })),
-    })
-  );
+  const slides: SlideImage[] = photos.map(({ src, width, height, srcSet }) => ({
+    src,
+    width,
+    height,
+    srcSet: srcSet?.map(({ src, width, height }) => ({ src, width, height })),
+  }));
 
   return (
     <>
       <BildeHeader>Bilder</BildeHeader>
       <MobileOnly>
-        <PhotoAlbum
-          layout="columns"
-          photos={imagesInPhotoAlbumFormat}
+        <ColumnsPhotoAlbum
+          photos={photos}
           columns={2}
-          onClick={(_event, _photo, index) => setIndex(index)}
-          renderPhoto={NextJsImage}
+          onClick={({ index }) => setIndex(index)}
+          render={{ image: renderNextJsImage }}
         />
       </MobileOnly>
       <DesktopOnly>
         <Width90Centered>
-          <PhotoAlbum
-            layout="rows"
-            photos={imagesInPhotoAlbumFormat}
+          <RowsPhotoAlbum
+            photos={photos}
             targetRowHeight={200}
-            onClick={(_event, _photo, index) => setIndex(index)}
-            renderPhoto={NextJsImage}
+            onClick={({ index }) => setIndex(index)}
+            render={{ image: renderNextJsImage }}
           />
         </Width90Centered>
       </DesktopOnly>
@@ -93,45 +116,3 @@ export default function Bilder({ images }: Props) {
     </>
   );
 }
-
-type Photo = {
-  blurDataUrl: string;
-  height: number;
-  width: number;
-  src: string;
-  images: any[];
-};
-
-type NextJsImageProps = PhotoProps<Photo> & {
-  wrapperProps?: React.HTMLAttributes<HTMLDivElement>;
-};
-
-const NextJsImage = ({ photo, imageProps, wrapperProps }: NextJsImageProps) => {
-  const { width, height, blurDataUrl } = photo;
-  const { src, alt, title, style, sizes, className, onClick } = imageProps;
-  const { style: wrapperStyle, ...restWrapperProps } = wrapperProps ?? {};
-  return (
-    <div
-      style={{
-        width: style.width,
-        padding: style.padding,
-        marginBottom: style.marginBottom,
-        ...wrapperStyle,
-      }}
-      {...restWrapperProps}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        title={title}
-        sizes={sizes}
-        blurDataURL={blurDataUrl}
-        width={width}
-        height={height}
-        className={className}
-        onClick={onClick}
-        loader={loader}
-      />
-    </div>
-  );
-};
