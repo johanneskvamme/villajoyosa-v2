@@ -22,6 +22,12 @@ type Props = {
   imagesAtStaticPositions: ImageAtStaticPosition[];
 };
 
+const description =
+  "Nyt den neste ferien din fra vår toppleilighet i Villajoyosa, Spania. Med utsikt til havet er leiligheten en skjult perle langs Costa Blanca.";
+const shareTitle = "Lei vår toppleilighet i Villajoyosa, Spania";
+const shareImage =
+  "https://cdn.sanity.io/images/ws1g0t28/production/df357e967730721824bf9c6892e68aec8ece4022-921x480.webp?w=640&fm=webp";
+
 const SeparatorLine = styled.div`
   display: none;
   @media screen and (min-width: 1024px) {
@@ -47,30 +53,22 @@ const Home: FC<Props> = (props) => {
   return (
     <>
       <Head>
-        <meta
-          key="seo-description"
-          name="description"
-          content="
-            Nyt den neste ferien din fra vår toppleilighet i Villajoyosa, Spania. 
-            Med utsikt til havet er leiligheten en skjult perle langs Costa Blanca.
-          "
-        />
+        <meta key="seo-description" name="description" content={description} />
         <title>Leilighet i Villajoyosa</title>
         <meta
           name="favicon-source"
           content="Holiday icon by Icons8 https://icons8.com/icons/set/favicon-beach"
         />
-        <meta
-          name="og:image"
-          content="https://cdn.sanity.io/images/ws1g0t28/production/df357e967730721824bf9c6892e68aec8ece4022-921x480.webp?w=640&fm=webp"
-        />
-        <meta
-          name="og:title"
-          content="Lei vår toppleilighet i Villajoyosa, Spania"
-        />
+        <meta property="og:image" content={shareImage} />
+        <meta property="og:title" content={shareTitle} />
+        <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://villajoyosa.kvamme.land" />
         <meta property="og:locale" content="nb_NO" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={shareTitle} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={shareImage} />
       </Head>
       <main>
         <Page>
